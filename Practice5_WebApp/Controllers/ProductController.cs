@@ -52,7 +52,7 @@ namespace Practice5_WebApp.Controllers
 				//Update
 				_db.Products.Update(obj);
 			}
-			_db.SaveChangesAsync();
+			await _db.SaveChangesAsync();
 			return RedirectToAction("Index");
 		}
 

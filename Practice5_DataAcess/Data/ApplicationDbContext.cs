@@ -59,6 +59,12 @@ namespace Practice5_DataAccess.Data
 				.HasForeignKey(p => p.Product_Id)
 				.OnDelete(DeleteBehavior.Cascade);
 
+			modelBuilder.Entity<Product>()
+				.HasOne(p => p.Inventory)
+				.WithOne(i => i.Product)
+				.HasForeignKey<Inventory>(i => i.Product_Id)
+				.IsRequired(false);
+
 			var productsList = new Product[] {
 					new Product{Product_Id = 1, ProductName ="Lemon",Description ="They are small but sweet", Price = 15, QuantityInStock = 100 },
 					new Product{Product_Id = 2,ProductName = "Mango",Description = "Large and no seed",Price = 32.5,QuantityInStock = 50 },

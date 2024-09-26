@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practice5_DataAccess", "Pra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practice5_Model", "Practice5_Model\Practice5_Model.csproj", "{4BB2F353-6CD9-4C50-A261-10EFE2F3CE7E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice5.Tests", "Practice5.Tests\Practice5.Tests.csproj", "{F18724F2-55AD-4F6F-83DF-0E64324764EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Practice5.Tests", "Practice5.Tests\Practice5.Tests.csproj", "{F18724F2-55AD-4F6F-83DF-0E64324764EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practice5_API", "Practice5_API\Practice5_API.csproj", "{1206A745-98E4-4509-B515-8DB617A7CCC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F18724F2-55AD-4F6F-83DF-0E64324764EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F18724F2-55AD-4F6F-83DF-0E64324764EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F18724F2-55AD-4F6F-83DF-0E64324764EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1206A745-98E4-4509-B515-8DB617A7CCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1206A745-98E4-4509-B515-8DB617A7CCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1206A745-98E4-4509-B515-8DB617A7CCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1206A745-98E4-4509-B515-8DB617A7CCC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

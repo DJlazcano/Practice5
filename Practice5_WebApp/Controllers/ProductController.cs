@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Practice5_DataAccess.Data;
 using Practice5_Model.Models;
+using System.Net.Http.Headers;
+using System.Text.Json.Serialization;
+
 
 namespace Practice5_WebApp.Controllers
 {
@@ -8,14 +12,29 @@ namespace Practice5_WebApp.Controllers
 	{
 
 		private readonly ApplicationDbContext _db;
+		private readonly HttpClient _httpClient;
 
 		public ProductController(ApplicationDbContext db)
 		{
 
 			_db = db;
+			_httpClient = new HttpClient
+			{
+				BaseAddress = new Uri("https://localhost:7052/")
+			};
+
+			_httpClient.DefaultRequestHeaders.Accept.Clear();
+			_httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 		}
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
+			var response = await _httpClient.GetAsync("products");
+			if (response.IsSuccessStatusCode)
+			{
+				var json = await response.Content.ReadAsStringAsync();
+				var products = JsonConvert.DeserializeObject<List<Product>>(json);
+				return View(products);
+			}
 			List<Product> objList = _db.Products.ToList();
 
 			return View(objList);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Practice5_API.Filters.AuthFilters;
 using Practice5_DataAccess.Data;
 using Practice5_Model.Models;
 
@@ -30,6 +31,7 @@ namespace Practice5_API.Controllers
 		//[HttpGet("{id}")]
 		[HttpGet]
 		[Route("/product/{id}")]
+		[JwtTokenAuthFilterAttribute]
 		public IActionResult GetProductById(int id)
 		{
 			var product = _db.Products.Find(id);
@@ -37,15 +39,21 @@ namespace Practice5_API.Controllers
 			return Ok(product);
 		}
 
-		//Create Shirt
+
 
 		[HttpPost]
 		[Route("/product")]
+		[JwtTokenAuthFilterAttribute]
 		public async Task<IActionResult> CreateProduct([FromBody] Product product)
 		{
-			if (product == null) return BadRequest();
+			if (product == null) return BadRequest("Product is null");
 
-			await _db.Products.AddAsync(product);
+			product.Inventory = new Inventory()
+			{
+				Stock = 0
+			};
+
+			_db.Products.Add(product);
 			await _db.SaveChangesAsync();
 
 			return CreatedAtAction(nameof(GetProductById), new { id = product.Product_Id }, product);
@@ -53,7 +61,7 @@ namespace Practice5_API.Controllers
 
 		[HttpPut]
 		[Route("/product/{id}")]
-
+		[JwtTokenAuthFilterAttribute]
 		public IActionResult UpdateProduct(int id, Product product)
 		{
 			if (id != product.Product_Id)
@@ -75,6 +83,7 @@ namespace Practice5_API.Controllers
 
 		[HttpDelete]
 		[Route("/product/{id}")]
+		[JwtTokenAuthFilterAttribute]
 		public IActionResult DeleteProduct(int id)
 		{
 			var product = _db.Products.First(p => p.Product_Id == id);

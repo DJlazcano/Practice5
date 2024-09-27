@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Practice5_DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class DbSetUp : Migration
+    public partial class dataseedfix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,26 @@ namespace Practice5_DataAccess.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.Product_Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Inventories",
+                columns: table => new
+                {
+                    Inventory_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Stock = table.Column<int>(type: "int", nullable: false),
+                    Product_Id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Inventories", x => x.Inventory_Id);
+                    table.ForeignKey(
+                        name: "FK_Inventories_Products_Product_Id",
+                        column: x => x.Product_Id,
+                        principalTable: "Products",
+                        principalColumn: "Product_Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -81,7 +101,7 @@ namespace Practice5_DataAccess.Migrations
                 columns: new[] { "Product_Id", "Description", "Price", "ProductName", "QuantityInStock" },
                 values: new object[,]
                 {
-                    { 1, "They are small but sweet", 15.0, "Lemon", 100 },
+                    { 1, "Theyw are small but sweet", 15.0, "Lemon", 100 },
                     { 2, "Large and no seed", 32.5, "Mango", 50 },
                     { 3, "Some came damaged", 85.5, "Avocado", 230 },
                     { 4, "Very sweet and juicy", 12.4, "Orange", 400 },
@@ -91,6 +111,23 @@ namespace Practice5_DataAccess.Migrations
                     { 8, "Very sweet and plenty of them", 36.299999999999997, "Blueberry", 200 },
                     { 9, "Large and no seed, also very sweet", 29.300000000000001, "Cantaloupe", 36 },
                     { 10, "Large and Full of water", 43.5, "Coconut", 136 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Inventories",
+                columns: new[] { "Inventory_Id", "Product_Id", "Stock" },
+                values: new object[,]
+                {
+                    { 1, 1, 100 },
+                    { 2, 2, 200 },
+                    { 3, 3, 30 },
+                    { 4, 4, 234 },
+                    { 5, 5, 531 },
+                    { 6, 6, 345 },
+                    { 7, 7, 322 },
+                    { 8, 8, 345 },
+                    { 9, 9, 232 },
+                    { 10, 10, 40 }
                 });
 
             migrationBuilder.InsertData(
@@ -128,6 +165,12 @@ namespace Practice5_DataAccess.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Inventories_Product_Id",
+                table: "Inventories",
+                column: "Product_Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Purchases_Product_Id",
                 table: "Purchases",
                 column: "Product_Id");
@@ -141,6 +184,9 @@ namespace Practice5_DataAccess.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Inventories");
+
             migrationBuilder.DropTable(
                 name: "Purchases");
 

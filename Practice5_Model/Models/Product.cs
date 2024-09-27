@@ -22,7 +22,6 @@ namespace Practice5_Model.Models
 
 		public ICollection<Sale> Sales { get; set; } = new List<Sale>();
 		public ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
-
 		public Inventory Inventory { get; set; }
 	}
 }

@@ -12,8 +12,8 @@ using Practice5_DataAccess.Data;
 namespace Practice5_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240919193921_DataInsertInventory1")]
-    partial class DataInsertInventory1
+    [Migration("20240927192420_dataseedfix")]
+    partial class dataseedfix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,7 +139,7 @@ namespace Practice5_DataAccess.Migrations
                         new
                         {
                             Product_Id = 1,
-                            Description = "They are small but sweet",
+                            Description = "Theyw are small but sweet",
                             Price = 15.0,
                             ProductName = "Lemon",
                             QuantityInStock = 100
@@ -481,8 +481,7 @@ namespace Practice5_DataAccess.Migrations
                     b.HasOne("Practice5_Model.Models.Product", "Product")
                         .WithOne("Inventory")
                         .HasForeignKey("Practice5_Model.Models.Inventory", "Product_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Product");
                 });

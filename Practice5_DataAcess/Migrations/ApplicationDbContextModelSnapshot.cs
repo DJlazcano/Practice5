@@ -42,6 +42,68 @@ namespace Practice5_DataAccess.Migrations
                         .IsUnique();
 
                     b.ToTable("Inventories");
+
+                    b.HasData(
+                        new
+                        {
+                            Inventory_Id = 1,
+                            Product_Id = 1,
+                            Stock = 100
+                        },
+                        new
+                        {
+                            Inventory_Id = 2,
+                            Product_Id = 2,
+                            Stock = 200
+                        },
+                        new
+                        {
+                            Inventory_Id = 3,
+                            Product_Id = 3,
+                            Stock = 30
+                        },
+                        new
+                        {
+                            Inventory_Id = 4,
+                            Product_Id = 4,
+                            Stock = 234
+                        },
+                        new
+                        {
+                            Inventory_Id = 5,
+                            Product_Id = 5,
+                            Stock = 531
+                        },
+                        new
+                        {
+                            Inventory_Id = 6,
+                            Product_Id = 6,
+                            Stock = 345
+                        },
+                        new
+                        {
+                            Inventory_Id = 7,
+                            Product_Id = 7,
+                            Stock = 322
+                        },
+                        new
+                        {
+                            Inventory_Id = 8,
+                            Product_Id = 8,
+                            Stock = 345
+                        },
+                        new
+                        {
+                            Inventory_Id = 9,
+                            Product_Id = 9,
+                            Stock = 232
+                        },
+                        new
+                        {
+                            Inventory_Id = 10,
+                            Product_Id = 10,
+                            Stock = 40
+                        });
                 });
 
             modelBuilder.Entity("Practice5_Model.Models.Product", b =>
@@ -74,7 +136,7 @@ namespace Practice5_DataAccess.Migrations
                         new
                         {
                             Product_Id = 1,
-                            Description = "They are small but sweet",
+                            Description = "Theyw are small but sweet",
                             Price = 15.0,
                             ProductName = "Lemon",
                             QuantityInStock = 100

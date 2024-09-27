@@ -32,7 +32,7 @@ namespace Practice5_API.Controllers
 			return Ok(inventory);
 		}
 
-		//Create Shirt
+
 
 		[HttpPost]
 		[Route("/inventory")]
@@ -40,13 +40,13 @@ namespace Practice5_API.Controllers
 		{
 			if (inventory == null) return BadRequest();
 
-			var product = _db.Products.Find(inventory.Product_Id);
+			var product = await _db.Products.FindAsync(inventory.Product_Id);
 
-			if (product == null) return BadRequest();
+			if (product == null) return BadRequest("Product Not Found");
 
-			inventory.Product = product;
+			inventory.Product_Id = product.Product_Id;
 
-			await _db.Inventories.AddAsync(inventory);
+			_db.Inventories.Add(inventory);
 			await _db.SaveChangesAsync();
 
 			return CreatedAtAction(nameof(GetinventoryById), new { id = inventory.Inventory_Id }, inventory);

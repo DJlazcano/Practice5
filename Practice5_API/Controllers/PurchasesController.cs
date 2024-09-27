@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using Practice5_DataAccess.Data;
 using Practice5_Model.Models;
 
@@ -32,7 +33,7 @@ namespace Practice5_API.Controllers
 			return Ok(purchase);
 		}
 
-		//Create Shirt
+
 
 		[HttpPost]
 		[Route("/purchase")]
@@ -41,9 +42,9 @@ namespace Practice5_API.Controllers
 			if (purchase == null) return BadRequest();
 
 
-			var product = _db.Products.Find(purchase.Product_Id);
+			var product = await _db.Products.FindAsync(purchase.Product_Id);
 
-			if (product == null) return BadRequest();
+			if (product == null || purchase.Product_Id == 0) return BadRequest("Product Not Found");
 
 			purchase.Product = product;
 

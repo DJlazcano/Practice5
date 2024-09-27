@@ -33,7 +33,7 @@ namespace Practice5_API.Controllers
 			return Ok(sale);
 		}
 
-		//Create Shirt
+
 
 		[HttpPost]
 		[Route("/sale")]
@@ -46,7 +46,7 @@ namespace Practice5_API.Controllers
 
 			sale.Product = product;
 
-			await _db.Sales.AddAsync(sale);
+			_db.Sales.Add(sale);
 			await _db.SaveChangesAsync();
 
 			return CreatedAtAction(nameof(GetsaleById), new { id = sale.Sale_Id }, sale);

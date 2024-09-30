@@ -62,7 +62,7 @@ namespace Practice5_API.Controllers
 		[HttpPut]
 		[Route("/product/{id}")]
 		[JwtTokenAuthFilterAttribute]
-		public IActionResult UpdateProduct(int id, Product product)
+		public IActionResult UpdateProduct(int id, [FromBody] Product product)
 		{
 			if (id != product.Product_Id)
 			{
